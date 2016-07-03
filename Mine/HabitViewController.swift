@@ -7,13 +7,32 @@
 //
 
 import UIKit
+import CoreData
 
 class HabitViewController: UIViewController {
 
-    private var habits: [Habit] = []
+    // MARL: - Public Properties
+    
+    var managedContext: NSManagedObjectContext!
+    
+    // MARK: - Private Properties
+    
+    private var habits: [Target] = []
+    private var entity: NSEntityDescription!
     
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - View Controller lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        entity = NSEntityDescription.entityForName("Target", inManagedObjectContext: managedContext)
+        
+        loadHabitIfNeeded()
+    }
+    
+    // MARK: - Helper
+
     @IBAction func addHabit(sender: AnyObject) {
         let alert = UIAlertController(title: "添加习惯", message: "添加一个你将要达到习惯", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler { textFiled in
@@ -24,9 +43,7 @@ class HabitViewController: UIViewController {
                 if let tf = alert.textFields?.first {
                     let trimmed = tf.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                     if !trimmed.isEmpty {
-                        let habit = Habit(title: tf.text!, createDate: NSDate())
-                        strongSelf.habits.append(habit)
-                        strongSelf.tableView.reloadData()
+                        strongSelf.addTarget(tf.text!)
                     }
                 }
             }
@@ -38,6 +55,39 @@ class HabitViewController: UIViewController {
         alert.addAction(cancelAction)
         presentViewController(alert, animated: true, completion: nil)
     }
+    
+    private let habitKeepDateNumber = 21
+    private func addTarget(text: String) {
+
+        let target = Target(entity: entity, insertIntoManagedObjectContext: managedContext)
+        
+        target.createDate = NSDate()
+        target.remainDate = habitKeepDateNumber
+        target.title = text
+        
+        do {
+            try managedContext.save()
+            habits.append(target)
+            tableView.reloadData()
+        } catch let error as NSError {
+            print("Save create habit error: \(error.localizedDescription)")
+        }
+    }
+    
+    private func loadHabitIfNeeded() {
+        let fetchRequest = NSFetchRequest(entityName: "Target")
+        let count = managedContext.countForFetchRequest(fetchRequest, error: nil)
+        if count == 0 { return }
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest) as! [Target]
+            habits = results
+            tableView.reloadData()
+        } catch let error as NSError {
+            print("Fetch exist habit error: \(error.localizedDescription)")
+        }
+    }
+    
 }
 
 // MARK: - Table View DataSource

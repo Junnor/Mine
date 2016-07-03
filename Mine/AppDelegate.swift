@@ -17,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let navic = window?.rootViewController as? UINavigationController
+        let habitViewController = navic?.visibleViewController as? HabitViewController
+        habitViewController?.managedContext = managedObjectContext
+        
         return true
     }
 
