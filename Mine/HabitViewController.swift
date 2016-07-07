@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-private let FORM_HABIT_DAY = 21
+private let FORM_HABIT_DAY_NUMBER = 21
 
 class HabitViewController: UIViewController {
 
@@ -58,13 +58,12 @@ class HabitViewController: UIViewController {
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    private let habitKeepDateNumber = 21
     private func addTarget(text: String) {
 
         let target = Target(entity: entity, insertIntoManagedObjectContext: managedContext)
         
         target.createDate = NSDate()
-        target.remainDate = habitKeepDateNumber
+        target.remainDate = FORM_HABIT_DAY_NUMBER
         target.title = text
         
         do {
@@ -126,7 +125,7 @@ extension HabitViewController: UITableViewDataSource {
         
         let flags = NSCalendarUnit.Day
         let components = calendar.components(flags, fromDate: date1, toDate: date2, options: [])
-        let remainDays = max(FORM_HABIT_DAY - components.day, 0)
+        let remainDays = max(FORM_HABIT_DAY_NUMBER - components.day, 0)
         return "Remain: \(remainDays) day(s)"
     }
 }
