@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+private let FORM_HABIT_DAY = 21
+
 class HabitViewController: UIViewController {
 
     // MARL: - Public Properties
@@ -99,11 +101,33 @@ extension HabitViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ID", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("ID", forIndexPath: indexPath) as! TargetCell
         let habit = habits[indexPath.row]
-        cell.textLabel?.text = habit.title
-        cell.detailTextLabel?.text = "\(habit.createDate)"
+
+        cell.titleLabel.text = habit.title
+        cell.addDateLabel.text = createDateText(habit.createDate!)
+        cell.remainDateLabel.text = remainDateTextWithCreateDate(habit.createDate!)
+        
         return cell
+    }
+    
+    private func createDateText(date: NSDate) -> String {
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Day, .Month, .Year], fromDate: date)
+        return "Created: \(components.year)-\(components.month)-\(components.day)"
+    }
+    
+    private func remainDateTextWithCreateDate(createDate: NSDate) -> String {
+        let calendar: NSCalendar = NSCalendar.currentCalendar()
+        
+        // Replace the hour (time) of both dates with 00:00
+        let date1 = calendar.startOfDayForDate(createDate)
+        let date2 = calendar.startOfDayForDate(NSDate())
+        
+        let flags = NSCalendarUnit.Day
+        let components = calendar.components(flags, fromDate: date1, toDate: date2, options: [])
+        let remainDays = max(FORM_HABIT_DAY - components.day, 0)
+        return "Remain: \(remainDays) day(s)"
     }
 }
 
