@@ -2,14 +2,16 @@
 //  Habit.swift
 //  Mine
 //
-//  Created by Ju on 16/6/30.
+//  Created by Ju on 16/7/9.
 //  Copyright © 2016年 Ju. All rights reserved.
 //
 
 import Foundation
+import CoreData
 
-struct Habit {
-    
-    let title: String
-    let createDate: NSDate
+
+class Habit: NSManagedObject {
+
+// Insert code here to add functionality to your managed object subclass
+
 }

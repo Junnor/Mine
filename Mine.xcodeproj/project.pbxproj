@@ -9,20 +9,21 @@
 /* Begin PBXBuildFile section */
 		8B0C4F3E1D28B31300EC01F4 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C4F3D1D28B31300EC01F4 /* DateViewController.swift */; };
 		8B4ED05C1D2E56D800ED3EAA /* TargetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4ED05B1D2E56D800ED3EAA /* TargetCell.swift */; };
+		8BD24C101D309E400099EF36 /* Habit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD24C0E1D309E400099EF36 /* Habit+CoreDataProperties.swift */; };
+		8BD24C111D309E400099EF36 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD24C0F1D309E400099EF36 /* Habit.swift */; };
 		8BD92DAE1D25376700AD8BE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD92DAD1D25376700AD8BE6 /* AppDelegate.swift */; };
 		8BD92DB31D25376700AD8BE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BD92DB11D25376700AD8BE6 /* Main.storyboard */; };
 		8BD92DB61D25376700AD8BE6 /* Mine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8BD92DB41D25376700AD8BE6 /* Mine.xcdatamodeld */; };
 		8BD92DB81D25376700AD8BE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BD92DB71D25376700AD8BE6 /* Assets.xcassets */; };
 		8BD92DBB1D25376700AD8BE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BD92DB91D25376700AD8BE6 /* LaunchScreen.storyboard */; };
-		8BD92DCA1D25384700AD8BE6 /* Target+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD92DC81D25384700AD8BE6 /* Target+CoreDataProperties.swift */; };
-		8BD92DCB1D25384700AD8BE6 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD92DC91D25384700AD8BE6 /* Target.swift */; };
 		8BD92DD11D2541F000AD8BE6 /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD92DD01D2541F000AD8BE6 /* HabitViewController.swift */; };
-		8BD92DD31D25451700AD8BE6 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD92DD21D25451700AD8BE6 /* Habit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8B0C4F3D1D28B31300EC01F4 /* DateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		8B4ED05B1D2E56D800ED3EAA /* TargetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetCell.swift; sourceTree = "<group>"; };
+		8BD24C0E1D309E400099EF36 /* Habit+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Habit+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8BD24C0F1D309E400099EF36 /* Habit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		8BD92DAA1D25376700AD8BE6 /* Mine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BD92DAD1D25376700AD8BE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BD92DB21D25376700AD8BE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -30,10 +31,7 @@
 		8BD92DB71D25376700AD8BE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8BD92DBA1D25376700AD8BE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8BD92DBC1D25376700AD8BE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8BD92DC81D25384700AD8BE6 /* Target+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Target+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		8BD92DC91D25384700AD8BE6 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 		8BD92DD01D2541F000AD8BE6 /* HabitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
-		8BD92DD21D25451700AD8BE6 /* Habit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,9 +64,8 @@
 		8BD92DAC1D25376700AD8BE6 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				8BD92DC81D25384700AD8BE6 /* Target+CoreDataProperties.swift */,
-				8BD92DC91D25384700AD8BE6 /* Target.swift */,
-				8BD92DD21D25451700AD8BE6 /* Habit.swift */,
+				8BD24C0E1D309E400099EF36 /* Habit+CoreDataProperties.swift */,
+				8BD24C0F1D309E400099EF36 /* Habit.swift */,
 				8BD92DAD1D25376700AD8BE6 /* AppDelegate.swift */,
 				8BD92DD01D2541F000AD8BE6 /* HabitViewController.swift */,
 				8B0C4F3D1D28B31300EC01F4 /* DateViewController.swift */,
@@ -114,7 +111,7 @@
 				TargetAttributes = {
 					8BD92DA91D25376700AD8BE6 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = GUQZ8J5T5B;
+						DevelopmentTeam = N5NQESTGE5;
 					};
 				};
 			};
@@ -155,13 +152,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B0C4F3E1D28B31300EC01F4 /* DateViewController.swift in Sources */,
-				8BD92DCA1D25384700AD8BE6 /* Target+CoreDataProperties.swift in Sources */,
 				8B4ED05C1D2E56D800ED3EAA /* TargetCell.swift in Sources */,
 				8BD92DD11D2541F000AD8BE6 /* HabitViewController.swift in Sources */,
-				8BD92DD31D25451700AD8BE6 /* Habit.swift in Sources */,
+				8BD24C101D309E400099EF36 /* Habit+CoreDataProperties.swift in Sources */,
 				8BD92DAE1D25376700AD8BE6 /* AppDelegate.swift in Sources */,
+				8BD24C111D309E400099EF36 /* Habit.swift in Sources */,
 				8BD92DB61D25376700AD8BE6 /* Mine.xcdatamodeld in Sources */,
-				8BD92DCB1D25384700AD8BE6 /* Target.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

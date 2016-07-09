@@ -19,8 +19,7 @@ class HabitViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private var habits: [Target] = []
-    private var entity: NSEntityDescription!
+    private var fetchedResultsController: NSFetchedResultsController!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -28,9 +27,20 @@ class HabitViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        entity = NSEntityDescription.entityForName("Target", inManagedObjectContext: managedContext)
+        let fetchRequest = NSFetchRequest(entityName: "Habit")
+        let remainDateSort = NSSortDescriptor(key: "remainDate", ascending: false)
+        fetchRequest.sortDescriptors = [remainDateSort]
         
-        loadHabitIfNeeded()
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: "MyHabit")
+        fetchedResultsController.delegate = self
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Fetch request error: \(error.localizedDescription)")
+        }
+        
+        tableView.backgroundColor = UIColor.blackColor()
     }
     
     // MARK: - Helper
@@ -45,7 +55,7 @@ class HabitViewController: UIViewController {
                 if let tf = alert.textFields?.first {
                     let trimmed = tf.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                     if !trimmed.isEmpty {
-                        strongSelf.addTarget(tf.text!)
+                        strongSelf.addHabitWithTitle(tf.text!)
                     }
                 }
             }
@@ -58,37 +68,17 @@ class HabitViewController: UIViewController {
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    private func addTarget(text: String) {
-
-        let target = Target(entity: entity, insertIntoManagedObjectContext: managedContext)
-        
-        target.createDate = NSDate()
-        target.remainDate = FORM_HABIT_DAY_NUMBER
-        target.title = text
-        
+    private func addHabitWithTitle(title: String) {
+        let habit = NSEntityDescription.insertNewObjectForEntityForName("Habit", inManagedObjectContext: managedContext) as! Habit
+        habit.createDate = NSDate()
+        habit.remainDate = FORM_HABIT_DAY_NUMBER
+        habit.title = title
         do {
             try managedContext.save()
-            habits.append(target)
-            tableView.reloadData()
         } catch let error as NSError {
             print("Save create habit error: \(error.localizedDescription)")
         }
     }
-    
-    private func loadHabitIfNeeded() {
-        let fetchRequest = NSFetchRequest(entityName: "Target")
-        let count = managedContext.countForFetchRequest(fetchRequest, error: nil)
-        if count == 0 { return }
-        
-        do {
-            let results = try managedContext.executeFetchRequest(fetchRequest) as! [Target]
-            habits = results
-            tableView.reloadData()
-        } catch let error as NSError {
-            print("Fetch exist habit error: \(error.localizedDescription)")
-        }
-    }
-    
 }
 
 // MARK: - Table View DataSource
@@ -96,18 +86,24 @@ class HabitViewController: UIViewController {
 extension HabitViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return habits.count
+        return (fetchedResultsController.fetchedObjects?.count)!
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ID", forIndexPath: indexPath) as! TargetCell
-        let habit = habits[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("ID", forIndexPath: indexPath) as! HabitCell
 
+        configureCell(cell, indexPath: indexPath)
+        return cell
+    }
+    
+    private func configureCell(cell: HabitCell, indexPath: NSIndexPath) {
+        let habit = fetchedResultsController.objectAtIndexPath(indexPath) as! Habit
+        
+        cell.backgroundColor = UIColor.grayColor()
+        
         cell.titleLabel.text = habit.title
         cell.addDateLabel.text = createDateText(habit.createDate!)
         cell.remainDateLabel.text = remainDateTextWithCreateDate(habit.createDate!)
-        
-        return cell
     }
     
     private func createDateText(date: NSDate) -> String {
@@ -136,6 +132,52 @@ extension HabitViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        switch editingStyle {
+        case .Delete:
+            let habit = fetchedResultsController.objectAtIndexPath(indexPath) as! Habit
+            managedContext.deleteObject(habit)
+            
+            do {
+                try managedContext.save()
+            } catch let error as NSError {
+                print("Delete habit error: \(error.localizedDescription)")
+            }
+
+        default:
+            return
+        }
+    }
+    
+}
+
+// MARK: - NSFetchedResultsControllerDelegate
+
+extension HabitViewController: NSFetchedResultsControllerDelegate {
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch type {
+        case .Insert:
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
+        case .Update:
+            let cell = tableView.cellForRowAtIndexPath(indexPath!) as! HabitCell
+            configureCell(cell, indexPath: indexPath!)
+        case .Move:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
+        }
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.endUpdates()
     }
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TargetCell: UITableViewCell {
+class HabitCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addDateLabel: UILabel!

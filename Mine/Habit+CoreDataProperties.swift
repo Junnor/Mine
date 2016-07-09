@@ -1,8 +1,8 @@
 //
-//  Target+CoreDataProperties.swift
+//  Habit+CoreDataProperties.swift
 //  Mine
 //
-//  Created by Ju on 16/6/30.
+//  Created by Ju on 16/7/9.
 //  Copyright © 2016年 Ju. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -12,9 +12,10 @@
 import Foundation
 import CoreData
 
-extension Target {
+extension Habit {
 
+    @NSManaged var title: String?
     @NSManaged var remainDate: NSNumber?
     @NSManaged var createDate: NSDate?
-    @NSManaged var title: String?
+
 }
