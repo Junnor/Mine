@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 
 private let FORM_HABIT_DAY_NUMBER = 21
+private let MAXIMUM_HABIT_COUNT = 7
 
 class HabitViewController: UIViewController {
 
@@ -21,12 +22,17 @@ class HabitViewController: UIViewController {
     
     private var fetchedResultsController: NSFetchedResultsController!
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.backgroundColor = UIColor.blackColor()
+        }
+    }
     
     // MARK: - View Controller lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let fetchRequest = NSFetchRequest(entityName: "Habit")
         let remainDateSort = NSSortDescriptor(key: "remainDate", ascending: false)
         fetchRequest.sortDescriptors = [remainDateSort]
@@ -40,7 +46,7 @@ class HabitViewController: UIViewController {
             print("Fetch request error: \(error.localizedDescription)")
         }
         
-        tableView.backgroundColor = UIColor.blackColor()
+        
     }
     
     // MARK: - Helper
@@ -69,15 +75,42 @@ class HabitViewController: UIViewController {
     }
     
     private func addHabitWithTitle(title: String) {
-        let habit = NSEntityDescription.insertNewObjectForEntityForName("Habit", inManagedObjectContext: managedContext) as! Habit
-        habit.createDate = NSDate()
-        habit.remainDate = FORM_HABIT_DAY_NUMBER
-        habit.title = title
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Save create habit error: \(error.localizedDescription)")
+        if fetchedResultsController.fetchedObjects?.count == MAXIMUM_HABIT_COUNT {
+            let alert = UIAlertController(title: "提示",
+                                          message: "最多添加 \(MAXIMUM_HABIT_COUNT) 个习惯",
+                                          preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "确定", style: .Default, handler: nil))
+            presentViewController(alert, animated: true, completion: nil)
+        } else {
+            let habit = NSEntityDescription.insertNewObjectForEntityForName("Habit", inManagedObjectContext: managedContext) as! Habit
+            habit.createDate = NSDate()
+            habit.remainDate = FORM_HABIT_DAY_NUMBER
+            habit.title = title
+            do {
+                try managedContext.save()
+            } catch let error as NSError {
+                print("Save create habit error: \(error.localizedDescription)")
+            }
         }
+    }
+    
+    private func fireNotification() {
+        let calendar = NSCalendar.currentCalendar()
+        let date = NSDate()
+        let componentsForFireDate = calendar.components([.Day, .Hour, .Minute, .Second], fromDate: date)
+        componentsForFireDate.hour = 24
+        componentsForFireDate.minute = 0
+        componentsForFireDate.second = 0
+        
+        let fireDateNotification = calendar.dateFromComponents(componentsForFireDate)
+        let notification = UILocalNotification()
+        notification.fireDate = fireDateNotification
+        notification.timeZone = NSTimeZone.localTimeZone()
+        notification.alertBody = nil
+        notification.userInfo = nil
+        notification.repeatInterval = .Day
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
 }
 
