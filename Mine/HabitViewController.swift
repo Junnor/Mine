@@ -35,7 +35,8 @@ class HabitViewController: UIViewController {
         
         let fetchRequest = NSFetchRequest(entityName: "Habit")
         let remainDateSort = NSSortDescriptor(key: "remainDate", ascending: false)
-        fetchRequest.sortDescriptors = [remainDateSort]
+        let addDateSort = NSSortDescriptor(key: "createDate", ascending: true)
+        fetchRequest.sortDescriptors = [addDateSort, remainDateSort]
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: "MyHabit")
         fetchedResultsController.delegate = self
