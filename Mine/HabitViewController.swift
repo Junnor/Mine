@@ -133,6 +133,18 @@ extension HabitViewController: UITableViewDataSource {
     private func configureCell(cell: HabitCell, indexPath: NSIndexPath) {
         let habit = fetchedResultsController.objectAtIndexPath(indexPath) as! Habit
         
+        let gradientView = GradientView(frame: cell.bounds)
+        gradientView.colors = [
+//            UIColor.blueColor(),
+            UIColor.cyanColor(),
+//            UIColor.greenColor(),
+//            UIColor.yellowColor(),
+            UIColor.redColor(),
+            UIColor.magentaColor()
+        ];
+        gradientView.setNeedsDisplay()
+        cell.backgroundView = gradientView
+        
         cell.backgroundColor = UIColor.grayColor()
         
         cell.titleLabel.text = habit.title

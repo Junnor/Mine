@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8B0C4F3E1D28B31300EC01F4 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C4F3D1D28B31300EC01F4 /* DateViewController.swift */; };
 		8B4ED05C1D2E56D800ED3EAA /* TargetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4ED05B1D2E56D800ED3EAA /* TargetCell.swift */; };
+		8BC213141D321FF500111616 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC213131D321FF500111616 /* GradientView.swift */; };
 		8BD24C101D309E400099EF36 /* Habit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD24C0E1D309E400099EF36 /* Habit+CoreDataProperties.swift */; };
 		8BD24C111D309E400099EF36 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD24C0F1D309E400099EF36 /* Habit.swift */; };
 		8BD92DAE1D25376700AD8BE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD92DAD1D25376700AD8BE6 /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		8B0C4F3D1D28B31300EC01F4 /* DateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		8B4ED05B1D2E56D800ED3EAA /* TargetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetCell.swift; sourceTree = "<group>"; };
+		8BC213131D321FF500111616 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		8BD24C0E1D309E400099EF36 /* Habit+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Habit+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8BD24C0F1D309E400099EF36 /* Habit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		8BD92DAA1D25376700AD8BE6 /* Mine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mine.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +72,7 @@
 				8BD92DD01D2541F000AD8BE6 /* HabitViewController.swift */,
 				8B0C4F3D1D28B31300EC01F4 /* DateViewController.swift */,
 				8B4ED05B1D2E56D800ED3EAA /* TargetCell.swift */,
+				8BC213131D321FF500111616 /* GradientView.swift */,
 				8BD92DB11D25376700AD8BE6 /* Main.storyboard */,
 				8BD92DB71D25376700AD8BE6 /* Assets.xcassets */,
 				8BD92DB91D25376700AD8BE6 /* LaunchScreen.storyboard */,
@@ -157,6 +160,7 @@
 				8BD24C101D309E400099EF36 /* Habit+CoreDataProperties.swift in Sources */,
 				8BD92DAE1D25376700AD8BE6 /* AppDelegate.swift in Sources */,
 				8BD24C111D309E400099EF36 /* Habit.swift in Sources */,
+				8BC213141D321FF500111616 /* GradientView.swift in Sources */,
 				8BD92DB61D25376700AD8BE6 /* Mine.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
