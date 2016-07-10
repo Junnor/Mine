@@ -71,7 +71,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.7526653955" blue="0.86341070019999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="uIm-bC-7dZ" secondAttribute="trailing" id="Ohk-ny-agp"/>
                             <constraint firstItem="uIm-bC-7dZ" firstAttribute="leading" secondItem="HGf-LU-qri" secondAttribute="leading" id="fa1-sY-jwk"/>
@@ -105,7 +105,7 @@
                     <view key="view" contentMode="scaleToFill" id="YVs-pT-C4Z">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.7526653955" blue="0.86341070019999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8M5-JJ-xZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
